@@ -30,9 +30,20 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
 
+//app.get('/', routes)(app);
+//app.get('/users', user.list);
+require('./models')(app);
+require('./routes')(app);
+
+/*
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+*/
+var server = http.createServer(app);
+server.listen(app.get('port'), function() {
+    console.log('Listening on ' + app.get('port'));
+});
+
+
