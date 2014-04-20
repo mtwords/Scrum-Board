@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Scrum board</title>
+    <link rel="stylesheet" href="todos.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="js/jquery-2.1.0.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div id="modal"></div>
+
+<h1>Scrum board</h1>
+
+<div id="todoapp">
+    <ul class="nav nav-pills">
+        <li class="all-pill"><a href="#all">All</a></li>
+        <li class="open-pill"><a href="#open">Open</a></li>
+        <li class="completed-pill"><a href="#completed">Completed</a></li>
+    </ul>
+    <input id="new-todo" type="text" placeholder="What needs to be done?">
+    <input id="add-item" type="button" value="Add">
+    <br />
+
+    <div id="todo" class="well pull-left">
+        <legend>Todo</legend>
+        <ul id="todo-list"></ul>
+    </div>
+    
+    <div id="progress" class="well pull-left">
+        <legend>In Progress</legend>
+        <ul id="progress-list"></ul>
+    </div>
+
+    <div id="done" class="well pull-left">
+        <legend>Done</legend>
+        <ul id="done-list"></ul>
+    </div>
+</div>
+
+
+<!-- Template for displaying a single Task / Card -->
+<script type="text/template" id="item-template">
+    <div class="view">
+        <strong>
+            <%= title %>
+        </strong>
+        <br />
+        <%= description %>
+        <br />
+        <%= estimate %>
+        <br />
+        <%= responsible %>
+        <br />
+        <%= state %>
+    </div>
+    <input class="edit" type="text" value="<%- title %>"/>
+    
+</script>
+
+<!-- Template for adding a new Task / Card -->
+<script type="text/template" id="item-add-template">
+    <div>
+        <input id="title" type="text" placeholder="Title">
+        <inupt id="description" type="text" placeholder="Description">
+    </div>
+</script>
+
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script src="todo_4.js"></script>
+
+
+</body>
+</html>

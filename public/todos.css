@@ -1,0 +1,70 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-decoration: underline;
+}
+
+#todoapp {
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+}
+
+#todoapp div {
+    width: 32%;
+    margin: 5px;
+}
+
+#todoapp ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+#todoapp li {
+    padding: 18px 20px 18px 0;
+    position: relative;
+}
+
+#todoapp li .view {
+    padding: 5px;
+    border: thin solid #777777;
+    background-color: #f8f48b;
+}
+
+#todoapp li:last-child {
+    border-bottom: none;
+}
+
+#todoapp li.done label {
+    color: #777777;
+    text-decoration: line-through;
+}
+
+#todoapp li.editing {
+    border-bottom: none;
+    margin-top: -1px;
+    padding: 0;
+}
+
+#todoapp li.editing:last-child {
+    margin-bottom: -1px;
+}
+
+#todoapp li.editing .edit {
+    display: block;
+    width: 444px;
+    padding: 13px 15px 14px 20px;
+    margin: 0;
+}
+
+#todoapp li.editing .view {
+    display: none;
+}
+
+#todoapp li .edit {
+    display: none;
+}
