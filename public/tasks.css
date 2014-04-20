@@ -41,37 +41,3 @@ h1 {
     border: thin solid #777777;
     background-color: #f8f48b;
 }
-
-#taskapp li:last-child {
-    border-bottom: none;
-}
-
-#taskapp li.done label {
-    color: #777777;
-    text-decoration: line-through;
-}
-
-#taskapp li.editing {
-    border-bottom: none;
-    margin-top: -1px;
-    padding: 0;
-}
-
-#taskapp li.editing:last-child {
-    margin-bottom: -1px;
-}
-
-#taskapp li.editing .edit {
-    display: block;
-    width: 444px;
-    padding: 13px 15px 14px 20px;
-    margin: 0;
-}
-
-#taskapp li.editing .view {
-    display: none;
-}
-
-#taskapp li .edit {
-    display: none;
-}

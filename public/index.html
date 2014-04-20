@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <!--link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"-->
     <script src="js/jquery-2.1.0.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
@@ -59,11 +59,7 @@
         <%= estimate %>
         <br />
         <%= responsible %>
-        <br />
-        <%= state %>
     </div>
-    <input class="edit" type="text" value="<%- title %>"/>
-    
 </script>
 
 <!-- Template for adding a new Task / Card -->
@@ -99,7 +95,10 @@
                 <option>done</option>
             </select>
         </div>
-        <button type="submit" id="save-task" class="btn btn-default">Save</button>
+        <div class="form-groupe">
+            <button type="submit" class="btn btn-primary" id="save-task" class="btn btn-default">Save</button>
+            <button type="button" id="cancel" class="btn btn-default">Cancel</button>
+        </div>
     </form>
 </script>
 

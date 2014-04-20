@@ -7,6 +7,7 @@ $(function () {
      * Main task model
      */
     var Task = Backbone.Model.extend({
+        urlRoot: '/tasks',
         defaults: {
             title: '',
             description: '',
@@ -28,19 +29,6 @@ $(function () {
         model: Task,
         url: '/tasks',
 
-        open: function() {
-          console.log('fetching open');
-          this.fetch({reset: true});
-          this.reset(this.where({done: false}));
-          this.trigger('reload');
-        },
-        completed: function() {
-          console.log('fetching completed');
-          this.fetch({reset: true});
-          this.reset(this.where({done: true}));
-          this.trigger('reload');
-        },
-
         all: function() {
           console.log('fetching all');
           this.fetch({reset: true});
@@ -57,10 +45,7 @@ $(function () {
         template: _.template($('#item-template').html()),
 
         events: {
-            "click .toggle": "toggleDone",
-            "dblclick .view": "edit",
-            "keypress .edit": "updateOnEnter",
-            "blur .edit": "close"
+            "dblclick .view": "edit"
         },
 
         initialize: function () {
@@ -73,26 +58,11 @@ $(function () {
             this.input = this.$('.edit');
             return this;
         },
-        toggleDone: function () {
-            console.log('toggle model');
-            this.model.toggle();
-        },
         edit: function () {
-            this.$el.addClass("editing");
-            this.input.focus();
+            taskList.showTaskForm(this.model);
+            //this.$el.addClass("editing");
+            //this.input.focus();
         },
-        close: function () {
-            var value = this.input.val();
-            if (!value) {
-                this.clear();
-            } else {
-                this.model.save({title: value});
-                this.$el.removeClass("editing");
-            }
-        },
-        updateOnEnter: function (e) {
-            if (e.keyCode == 13) this.close();
-        }
     });
 
     /**
@@ -105,6 +75,7 @@ $(function () {
 
         events: {
             'click #save-task': 'saveTask',
+            'click #cancel': 'close'
         },
 
         render: function() {
@@ -126,11 +97,23 @@ $(function () {
             this.model.set('responsible', this.$('#responsible').val());
             this.model.set('state', this.$('#state').val());
             
+            this.model.save();
             //this.model.save(this.model.toJSON());
             //taskList.addItem(this.model);
-            taskList.createItem(this.model);
+            /*
+            if (!this.model.isNew) {
+                this.model.save();
+            } else {
+                taskList.createItem(this.model);
+            }
+            */
+            this.close();
+        },
+        
+        close: function() {
             Backbone.history.navigate("/", {trigger: true});
             $('#modal').empty();
+            taskList.showAll();
         }
     });
 
@@ -183,7 +166,6 @@ $(function () {
 
             this.listenTo(this.tasks, 'add', this.addItem);
             this.listenTo(this.tasks, 'all', this.render);
-            // this.listenTo(this.tasks, 'reset', this.reload);
             this.listenTo(this.tasks, 'reload', this.reload);
 
             this.tasks.fetch({reset: true});
@@ -223,14 +205,20 @@ $(function () {
             */
         },
 
+        updateItem: function(item) {
+            this.tasks.update(item.toJSON());
+        },
+
         showNewTaskForm: function() {
-            var taskFormView = new TaskFormView({model: new Task()});
+            this.showTaskForm(new Task())
+        },
+        showTaskForm: function(model) {
+            var taskFormView = new TaskFormView({model: model});
             $('#modal').append(taskFormView.render().el);
         },
         showAll: function() {
             console.log('get all Items');
             this.tasks.all();
-            //this.addAll();
             console.log('nr. of items:' + this.tasks.length);
         }
 
