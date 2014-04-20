@@ -8,6 +8,12 @@ h1 {
     text-decoration: underline;
 }
 
+#modal {
+    /*position: absolute;*/
+    width: 500px;
+    margin: auto;
+}
+
 #taskapp {
     margin: 10px 0;
     padding: 0;
@@ -17,6 +23,7 @@ h1 {
 #taskapp div {
     width: 32%;
     margin: 5px;
+    height: 100%;
 }
 
 #taskapp ul {

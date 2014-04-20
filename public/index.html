@@ -24,12 +24,10 @@
 
 <div id="taskapp">
     <ul class="nav nav-pills">
-        <li class="all-pill"><a href="#all">All</a></li>
-        <li class="open-pill"><a href="#open">Open</a></li>
-        <li class="completed-pill"><a href="#completed">Completed</a></li>
+        <li class="add-pill"><a href="#add">Add Task</a></li>
+        <li class="all-pill"><a href="#all">Show all Tasks</a></li>
     </ul>
-    <input id="new-todo" type="text" placeholder="What needs to be done?">
-    <input id="add-item" type="button" value="Add">
+
     <br />
 
     <div id="todo" class="well pull-left">
@@ -70,10 +68,39 @@
 
 <!-- Template for adding a new Task / Card -->
 <script type="text/template" id="item-add-template">
-    <div>
-        <input id="title" type="text" placeholder="Title">
-        <inupt id="description" type="text" placeholder="Description">
-    </div>
+    <form class="form-horizontal" role="form">
+        <div class="form-groupe">
+            <label for="title">Title</label>
+            <input id="title" class="form-control" type="text" placeholder="Title..." />
+        </div>
+        <div class="form-groupe">
+            <label for="description">Description</label>
+            <input id="description" class="form-control" type="text" placeholder="Description..." />
+        </div>
+        <div class="form-groupe">
+            <label for="estimate">Estimate</label>
+            <select id="estimate" class="form-control" width="50px">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>5</option>
+                <option>8</option>
+            </select>
+        </div>
+        <div class="form-groupe">
+            <label for="responsible">Responsible</label>
+            <input id="responsible" class="form-control" type="text" placeholder="Responsible person..." />
+        </div>
+        <div class="form-groupe">
+            <label for="state">State</label>
+            <select id="state" class="form-control">
+                <option>todo</option>
+                <option>progress</option>
+                <option>done</option>
+            </select>
+        </div>
+        <button type="submit" id="save-task" class="btn btn-default">Save</button>
+    </form>
 </script>
 
 <script src="js/underscore.js"></script>
