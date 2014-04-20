@@ -1,8 +1,8 @@
 // A blog post model
 
 
-var Todo = {
-    todos: [
+var Task = {
+    tasks: [
     {
         id: '1',
         title: 'Title',
@@ -61,40 +61,40 @@ var Todo = {
 
   add: function (data) {
     // poor mans 'dup' (ruby), otherwise we will be modifying the original object
-    console.log('creating todo with ' + data);
+    console.log('creating task with ' + data);
     var data = this.clone(data);
     var id = this.getNextId();
     data.id = id;
-    this.todos.push(data);
+    this.tasks.push(data);
     return data;
   },
 
   update: function(data) {
     console.log('updating with ' + data);
-    for (var i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].id == data['id']) {
-        Todo.merge(this.todos[i], data);
-        return this.todos[i];
+    for (var i = 0; i < this.tasks.length; i++) {
+      if (this.tasks[i].id == data['id']) {
+        Task.merge(this.tasks[i], data);
+        return this.tasks[i];
       }
     }
     return void 0;
   },
 
   find: function (id) {
-    for (var i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].id == id) {
-        return this.todos[i];
+    for (var i = 0; i < this.tasks.length; i++) {
+      if (this.tasks[i].id == id) {
+        return this.tasks[i];
       }
     }
     return void 0;
   },
 
   remove: function (id) {
-    for (var i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].id == id) {
-        var todo = this.todos[i];
-        this.todos.splice(i, 1);
-        return todo; // remove element and return it
+    for (var i = 0; i < this.tasks.length; i++) {
+      if (this.tasks[i].id == id) {
+        var task = this.tasks[i];
+        this.tasks.splice(i, 1);
+        return task; // remove element and return it
       }
 
     }
@@ -102,44 +102,44 @@ var Todo = {
   },
 
   all: function () {
-    return this.todos;
+    return this.tasks;
   },
 
   clearAllEntries: function () {
-    this.todos = [];
+    this.tasks = [];
     this.last_id = 0;
   }
 };
 
 
 exports.getAllEntries = function () {
-  return Todo.all();
+  return Task.all();
 };
 
 exports.clearAllEntries = function () {
-  return Todo.clearAllEntries();
+  return Task.clearAllEntries();
 };
 
 
 
 exports.create = function (data) {
-  return Todo.add(data);
+  return Task.add(data);
 
 };
 
 
 exports.update = function (data) {
-  return Todo.update(data);
+  return Task.update(data);
 };
 
 
 
 exports.find = function (id) {
-  return Todo.find(id);
+  return Task.find(id);
 };
 
 exports.remove = function (id) {
-  return Todo.remove(id);
+  return Task.remove(id);
 }
 
 

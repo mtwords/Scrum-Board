@@ -3,7 +3,7 @@ $(function () {
 
 // Model
 
-  var Todo = Backbone.Model.extend({
+  var Task = Backbone.Model.extend({
     defaults: {
         title: '',
         description: '',
@@ -19,9 +19,9 @@ $(function () {
 
   });
 
-  var TodosCollection = Backbone.Collection.extend({
-    model: Todo,
-    url: '/todos',
+  var TasksCollection = Backbone.Collection.extend({
+    model: Task,
+    url: '/tasks',
 
     open: function() {
       console.log('fetching open');
@@ -46,7 +46,7 @@ $(function () {
 
 
 
-  var TodoView = Backbone.View.extend({
+  var TaskView = Backbone.View.extend({
 
     tagName: 'li',
 
@@ -93,13 +93,13 @@ $(function () {
 
   // Router
 
-  var TodoRouter = Backbone.Router.extend({
+  var TaskRouter = Backbone.Router.extend({
 
     routes: {
-      '' : 'showAllTodos',
-      'all': 'showAllTodos',
-      'open': 'showOpenTodos',
-      'completed' : 'showCompletedTodos'
+      '' : 'showAllTasks',
+      'all': 'showAllTasks',
+      'open': 'showOpenTasks',
+      'completed' : 'showCompletedTasks'
     },
 
     setApp: function(app) {
@@ -110,59 +110,59 @@ $(function () {
       console.log('we are in the index');
       this.app.showAll();
     },
-    showAllTodos: function() {
-      console.log('showing all todos');
+    showAllTasks: function() {
+      console.log('showing all Tasks');
       this.app.showAll();
     },
-    showOpenTodos: function() {
-      console.log('showing open todos');
+    showOpenTasks: function() {
+      console.log('showing open Tasks');
       this.app.showOpen();
     },
-    showCompletedTodos: function() {
-      console.log('showing completed todos');
+    showCompletedTasks: function() {
+      console.log('showing completed Tasks');
       this.app.showCompleted();
     }
 
   });
 
 
-  var TodoList = Backbone.View.extend({
-    el: $('#todoapp'),
+  var TaskList = Backbone.View.extend({
+    el: $('#taskapp'),
 
 
     events: {
       'click #add-item': 'createItem',
-      'keypress #new-todo': 'createItemOnEnter'
+      'keypress #new-task': 'createItemOnEnter'
     },
 
     initialize: function () {
-      this.todos =  new TodosCollection();
+      this.tasks =  new TasksCollection();
 
-      this.input = $('#new-todo');
+      this.input = $('#new-task');
       this.todoList = $('#todo-list');
       this.progressList = $('#progress-list');
       this.doneList = $('#done-list');
 
-      this.listenTo(this.todos, 'add', this.addItem);
-      this.listenTo(this.todos, 'all', this.render);
-      // this.listenTo(this.todos, 'reset', this.reload);
-      this.listenTo(this.todos, 'reload', this.reload);
+      this.listenTo(this.tasks, 'add', this.addItem);
+      this.listenTo(this.tasks, 'all', this.render);
+      // this.listenTo(this.tasks, 'reset', this.reload);
+      this.listenTo(this.tasks, 'reload', this.reload);
 
-      this.todos.fetch({reset: true});
+      this.tasks.fetch({reset: true});
 
     },
 
     addItem: function (item) {
-      var todoView = new TodoView({ model: item });
+      var taskView = new TaskView({ model: item });
         var state = item.get('state');
-        if (state === 'todo') this.todoList.append(todoView.render().el);
-        if (state === 'progress') this.progressList.append(todoView.render().el);
-        if (state === 'done') this.doneList.append(todoView.render().el);
+        if (state === 'todo') this.todoList.append(taskView.render().el);
+        if (state === 'progress') this.progressList.append(taskView.render().el);
+        if (state === 'done') this.doneList.append(taskView.render().el);
     },
 
     addAll: function () {
       console.log('addAll');
-      this.todos.each(this.addItem, this);
+      this.tasks.each(this.addItem, this);
     },
 
     reload: function() {
@@ -179,24 +179,24 @@ $(function () {
     },
     createItem: function () {
       if (!this.input.val()) return;
-      this.todos.create({ title: this.input.val() });
+      this.tasks.create({ title: this.input.val() });
       this.input.val('');
     },
 
     showOpen: function() {
       console.log('get open Items');
-      this.todos.open();
-      console.log('nr. of items:' + this.todos.length);
+      this.tasks.open();
+      console.log('nr. of items:' + this.tasks.length);
     },
     showCompleted: function() {
       console.log('get completed Items');
-      this.todos.completed();
-      console.log('nr. of items:' + this.todos.length);
+      this.tasks.completed();
+      console.log('nr. of items:' + this.tasks.length);
     },
     showAll: function() {
       console.log('get all Items');
-      this.todos.all();
-      console.log('nr. of items:' + this.todos.length);
+      this.tasks.all();
+      console.log('nr. of items:' + this.tasks.length);
     }
 
   });
@@ -205,9 +205,9 @@ $(function () {
 
 
 
-  var todoList = new TodoList();
-  var router = new TodoRouter();
-  router.setApp(todoList);
+  var taskList = new TaskList();
+  var router = new TaskRouter();
+  router.setApp(taskList);
   Backbone.history.start();
 
 
