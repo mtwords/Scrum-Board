@@ -27,14 +27,12 @@ if ('development' == app.get('env')) {
 }
 
 // load models
-
 var models = require('./models')(app);
 
 // load routes
-
 require('./routes')(app);
 
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
 });
