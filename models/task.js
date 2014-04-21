@@ -1,6 +1,6 @@
-// A blog post model
-
-
+/**
+ * a Task / Card model
+ */
 var Task = {
     tasks: [
     {
@@ -29,15 +29,15 @@ var Task = {
     },
     {
       id: '4',
-        title: 'Title4',
-        description: 'Description4',
+        title: 'Write a scrum board app',
+        description: 'scrum board app written in node.js and backbone.js',
         estimate: '2',
         responsible: 'Oliver',
         state: 'done',
     }
     ],
     
-    last_id: 3,
+    last_id: 4,
 
   getNextId: function () {
     this.last_id += 1;
