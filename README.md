@@ -24,4 +24,5 @@ npm install
 - app doesn't refresh edited tasks automatically
 
 ## Coming up
-- Drag & Drop support
+- drag & drop support
+- function for deleting tasks
