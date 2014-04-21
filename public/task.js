@@ -13,12 +13,7 @@ $(function () {
             description: '',
             estimate: '2',
             responsible: 'Oliver',
-            state: 'todo',
-            done: false
-        },
-
-        toggle: function () {
-          this.save({done: !this.get('done')});
+            state: 'todo'
         }
     });
 
@@ -60,8 +55,6 @@ $(function () {
         },
         edit: function () {
             taskList.showTaskForm(this.model);
-            //this.$el.addClass("editing");
-            //this.input.focus();
         },
     });
 
@@ -69,8 +62,6 @@ $(function () {
      * View of the Task form. Used for creating new Tasks.
      */
     var TaskFormView = Backbone.View.extend({
-        //tagName: 'div',
-        //className: 'modal',
         template: _.template($('#item-add-template').html()),
 
         events: {
@@ -97,17 +88,19 @@ $(function () {
             this.model.set('responsible', this.$('#responsible').val());
             this.model.set('state', this.$('#state').val());
             
-            this.model.save();
-            //this.model.save(this.model.toJSON());
-            //taskList.addItem(this.model);
-            /*
-            if (!this.model.isNew) {
-                this.model.save();
+            if (!this.model.isNew()) {
+                // TODO: doesn't refresh automatically
+                this.model.save({}, {
+                    success: _.bind(function (model) {
+                        Backbone.history.navigate("/", {trigger: true});
+                        $('#modal').empty();
+                        taskList.showAll();
+                    })
+                });
             } else {
                 taskList.createItem(this.model);
+                this.close();
             }
-            */
-            this.close();
         },
         
         close: function() {
@@ -159,7 +152,6 @@ $(function () {
         initialize: function () {
             this.tasks =  new TasksCollection();
 
-            this.input = $('#new-task');
             this.todoList = $('#todo-list');
             this.progressList = $('#progress-list');
             this.doneList = $('#done-list');
@@ -186,7 +178,7 @@ $(function () {
 
         reload: function() {
             console.log('reloading');
-            this.todoList.empty(); // clear the DOM element
+            this.todoList.empty();
             this.progressList.empty();
             this.doneList.empty();
             this.addAll();
@@ -198,11 +190,6 @@ $(function () {
         },
         createItem: function (item) {
             this.tasks.create(item.toJSON());
-            /*
-            if (!this.input.val()) return;
-            this.tasks.create({ title: this.input.val() });
-            this.input.val('');
-            */
         },
 
         updateItem: function(item) {
