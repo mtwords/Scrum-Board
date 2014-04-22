@@ -17,11 +17,11 @@ npm install
 
 ## Features
 - known "todo", "in progress" and "done" categories
-- add / edit new tasks
--- use double-click to edit / delete an existing task
+- add: click [Add Task] to add a new task / card
+- edit: use double-click to edit / delete an existing task
 
 ## Known problems
-- app doesn't show tasks / cards on startup --> must dig with url manipulation and function [show all tasks]
+- app doesn't show tasks / cards on startup --> remove #all suffix in url and click [Show all Tasks]
 - app doesn't refresh edited tasks automatically
 
 ## Coming up

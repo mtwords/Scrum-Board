@@ -9,7 +9,6 @@ h1 {
 }
 
 #modal {
-    /*position: absolute;*/
     width: 500px;
     margin: auto;
 }
@@ -38,6 +37,13 @@ h1 {
 
 #taskapp li .view {
     padding: 5px;
+    width: 80%;
     border: thin solid #777777;
     background-color: #f8f48b;
+}
+
+#taskapp li .view:hover {
+    box-shadow:2px 2px 10px 10px #C9C9C9;
+    -webkit-box-shadow:2px 2px 10px 10x #C9C9C9;
+    -moz-box-shadow:2px 2px 10px 10px #C9C9C9;
 }
