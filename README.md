@@ -11,13 +11,14 @@ npm install
 ```
 
 ## Technologies
-- node.js
+- node.js with express
 - backbone.js
 - bootstrap
 
 ## Features
 - known "todo", "in progress" and "done" categories
 - add / edit new tasks
+-- use double-click to edit / delete an existing task
 
 ## Known problems
 - app doesn't show tasks / cards on startup --> must dig with url manipulation and function [show all tasks]
@@ -25,4 +26,3 @@ npm install
 
 ## Coming up
 - drag & drop support
-- function for deleting tasks

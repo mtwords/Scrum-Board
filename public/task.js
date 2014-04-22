@@ -66,6 +66,7 @@ $(function () {
 
         events: {
             'click #save-task': 'saveTask',
+            'click #delete': 'deleteTask',
             'click #cancel': 'close'
         },
 
@@ -77,6 +78,11 @@ $(function () {
             this.$('#estimate').val(this.model.get('estimate'));
             this.$('#responsible').val(this.model.get('responsible'));
             this.$('#state').val(this.model.get('state'));
+
+            // only show delete button in edit mode
+            if (this.model.isNew()) {
+                this.$('#delete').detach();
+            }
 
             return this;
         },
@@ -102,7 +108,12 @@ $(function () {
                 this.close();
             }
         },
-        
+
+        deleteTask: function() {
+            this.model.destroy();
+            this.close();
+        },
+
         close: function() {
             Backbone.history.navigate("/", {trigger: true});
             $('#modal').empty();
