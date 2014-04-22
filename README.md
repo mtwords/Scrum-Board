@@ -21,8 +21,10 @@ npm install
 - edit: use double-click to edit / delete an existing task
 
 ## Known problems
-- app doesn't show tasks / cards on startup --> remove #all suffix in url and click [Show all Tasks]
+- app doesn't show tasks / cards on startup
 - app doesn't refresh edited tasks automatically
+
+Workaround: remove #all suffix in url (if present) and click [Show all Tasks]
 
 ## Coming up
 - drag & drop support
